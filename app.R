@@ -29,9 +29,9 @@ ui <- fluidPage(
                       
                       mainPanel(
                         tags$label(h3('Status/Output')), # Status/Output Text Box
-                        textOutput('contents'),          
+                        textOutput('contents'),          # Changed from verbatimTextOutput to textOutput
                         textOutput('bmiText'),           
-                        tableOutput('tabledata')         
+                        tableOutput('tabledata')         # Results table
                       ) # mainPanel()
              ), #tabPanel Home
              
@@ -53,7 +53,7 @@ server <- function(input, output, session) {
     data.frame(BMI = round(bmi_val, 2))
   })
   
-  # Status/Output Text Box
+  # Status/Output Text Box - changed renderPrint to renderText
   output$contents <- renderText({
     if (input$submitbutton > 0) { 
       "Calculation complete." 
@@ -62,7 +62,7 @@ server <- function(input, output, session) {
     }
   })
   
-  # Display BMI 
+  
   output$bmiText <- renderText({
     if (input$submitbutton > 0) {
       bmi_val <- input$weight / ((input$height / 100)^2)
